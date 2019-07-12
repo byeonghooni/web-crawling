@@ -1,3 +1,56 @@
-<div>
-    <h1>Body</h1>
+<div style="margin-top: auto; margin-bottom: auto">
+    <div class="col-md-offset-4 col-md-4">
+        <form action="/api/v1/crawling" method="post">
+            <div class="form-group">
+                <label for="urlInput">URL</label>
+                <input type="url"
+                       id="urlInput"
+                       name="urlInput"
+                       placeholder="URL을 입력하세요"
+                       required
+                       class="form-control"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="typeInput">Type</label>
+                <select
+                        id="typeInput"
+                        name="typeInput"
+                        class="form-control"
+                        required>
+                    <option value="0">HTML 태그 제외</option>
+                    <option value="1">Text 전체</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="outputBundleUnit">출력 묶음 단위(자연수)</label>
+                <input type="number"
+                       id="outputBundleUnit"
+                       name="outputBundleUnit"
+                       class="form-control"
+                       required
+                >
+            </div>
+            <button type="submit" class="btn btn-default pull-right">출력</button>
+        </form>
+        {{#if isError}}
+            <small style="color: red">{{errorMessage}}</small>
+        {{/if}}
+    </div>
+    <hr/>
+
+    <div class="col-md-12 my-auto">
+        <div class="form-group">
+            <label for="quotient">몫</label>
+            <textarea id="quotient" rows="8" class="form-control" disabled>{{{quotient}}}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="remainder">나머지</label>
+            <textarea id="remainder" rows="8" class="form-control" disabled>{{{remainder}}}</textarea>
+        </div>
+    </div>
 </div>
+

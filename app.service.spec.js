@@ -4,40 +4,51 @@ const getUniCode = char => char.charCodeAt(0);
 
 describe('app.service', () => {
   describe('isCapitalUniCode', () => {
-    it('should return true', () => {
+    const { isCapitalUniCode } = appService;
+
+    it('should be true when capital letter', () => {
       expect.assertions(3);
-      expect(appService.isCapitalUniCode(getUniCode('A'))).toBe(true);
-      expect(appService.isCapitalUniCode(getUniCode('F'))).toBe(true);
-      expect(appService.isCapitalUniCode(getUniCode('Z'))).toBe(true);
+      expect(isCapitalUniCode(getUniCode('A'))).toBe(true);
+      expect(isCapitalUniCode(getUniCode('F'))).toBe(true);
+      expect(isCapitalUniCode(getUniCode('Z'))).toBe(true);
     });
 
-    it('should return false', () => {
+    it('should be false when not capital letter', () => {
       expect.assertions(3);
-      expect(appService.isCapitalUniCode(getUniCode('#'))).toBe(false);
-      expect(appService.isCapitalUniCode(getUniCode('a'))).toBe(false);
-      expect(appService.isCapitalUniCode(getUniCode('3'))).toBe(false);
+      expect(isCapitalUniCode(getUniCode('#'))).toBe(false);
+      expect(isCapitalUniCode(getUniCode('a'))).toBe(false);
+      expect(isCapitalUniCode(getUniCode('3'))).toBe(false);
     });
   });
 
   describe('getUniCodeIfSmallThanCapitalElseOrigin', () => {
-    it('should be the same', () => {
+    const { getUniCodeIfSmallThanCapitalElseOrigin } = appService;
+
+    const smallAUnicode = getUniCode('a');
+    const smallZUnicode = getUniCode('z');
+    const capitalAUnicode = getUniCode('A');
+    const capitalZUnicode = getUniCode('Z');
+
+    it('should be the same when result is capital letter', () => {
       expect.assertions(4);
-      expect(appService.getUniCodeIfSmallThanCapitalElseOrigin(getUniCode('a'))).toBe(getUniCode('A'));
-      expect(appService.getUniCodeIfSmallThanCapitalElseOrigin(getUniCode('A'))).toBe(getUniCode('A'));
-      expect(appService.getUniCodeIfSmallThanCapitalElseOrigin(getUniCode('z'))).toBe(getUniCode('Z'));
-      expect(appService.getUniCodeIfSmallThanCapitalElseOrigin(getUniCode('Z'))).toBe(getUniCode('Z'));
+      expect(getUniCodeIfSmallThanCapitalElseOrigin(smallAUnicode)).toBe(capitalAUnicode);
+      expect(getUniCodeIfSmallThanCapitalElseOrigin(capitalAUnicode)).toBe(capitalAUnicode);
+      expect(getUniCodeIfSmallThanCapitalElseOrigin(smallZUnicode)).toBe(capitalZUnicode);
+      expect(getUniCodeIfSmallThanCapitalElseOrigin(capitalZUnicode)).toBe(capitalZUnicode);
     });
 
-    it('should not be the same', () => {
+    it('should not be the same when result is small letter', () => {
       expect.assertions(4);
-      expect(appService.getUniCodeIfSmallThanCapitalElseOrigin(getUniCode('A'))).not.toBe(getUniCode('a'));
-      expect(appService.getUniCodeIfSmallThanCapitalElseOrigin(getUniCode('Z'))).not.toBe(getUniCode('z'));
-      expect(appService.getUniCodeIfSmallThanCapitalElseOrigin(getUniCode('a'))).not.toBe(getUniCode('a'));
-      expect(appService.getUniCodeIfSmallThanCapitalElseOrigin(getUniCode('z'))).not.toBe(getUniCode('z'));
+      expect(getUniCodeIfSmallThanCapitalElseOrigin(capitalAUnicode)).not.toBe(smallAUnicode);
+      expect(getUniCodeIfSmallThanCapitalElseOrigin(capitalZUnicode)).not.toBe(smallZUnicode);
+      expect(getUniCodeIfSmallThanCapitalElseOrigin(smallAUnicode)).not.toBe(smallAUnicode);
+      expect(getUniCodeIfSmallThanCapitalElseOrigin(smallZUnicode)).not.toBe(smallZUnicode);
     });
   });
 
   describe('getSortedAlphabetArray', () => {
+    const { getSortedAlphabetArray } = appService;
+
     let inputText;
     let result;
 
@@ -45,25 +56,27 @@ describe('app.service', () => {
       expect.assertions(1);
       inputText = 'aegxAdw23!@AfBFwfW';
       result = ['A', 'A', 'a', 'B', 'd', 'e', 'F', 'f', 'f', 'g', 'W', 'w', 'w', 'x'];
-      expect(appService.getSortedAlphabetArray(inputText)).toStrictEqual(result);
+      expect(getSortedAlphabetArray(inputText)).toStrictEqual(result);
     });
 
     it('should return sorted alphabet array - second check', () => {
       expect.assertions(1);
       inputText = '12!$FEWas3412ERGxf';
       result = ['a', 'E', 'E', 'F', 'f', 'G', 'R', 's', 'W', 'x'];
-      expect(appService.getSortedAlphabetArray(inputText)).toStrictEqual(result);
+      expect(getSortedAlphabetArray(inputText)).toStrictEqual(result);
     });
 
     it('should return sorted alphabet array - third check', () => {
       expect.assertions(1);
       inputText = '!@#123asdqrwerABCDDAG';
       result = ['A', 'A', 'a', 'B', 'C', 'D', 'D', 'd', 'e', 'G', 'q', 'r', 'r', 's', 'w'];
-      expect(appService.getSortedAlphabetArray(inputText)).toStrictEqual(result);
+      expect(getSortedAlphabetArray(inputText)).toStrictEqual(result);
     });
   });
 
   describe('getSortedNumberArray', () => {
+    const { getSortedNumberArray } = appService;
+
     let inputText;
     let result;
 
@@ -71,68 +84,78 @@ describe('app.service', () => {
       expect.assertions(1);
       inputText = 'aegxAdw23!@AfB1235123FwfW';
       result = ['1', '1', '2', '2', '2', '3', '3', '3', '5'];
-      expect(appService.getSortedNumberArray(inputText)).toStrictEqual(result);
+      expect(getSortedNumberArray(inputText)).toStrictEqual(result);
     });
 
     it('should return sorted number array - second check', () => {
       expect.assertions(1);
       inputText = '12!$FE098450Was3412E34RGxf';
       result = ['0', '0', '1', '1', '2', '2', '3', '3', '4', '4', '4', '5', '8', '9'];
-      expect(appService.getSortedNumberArray(inputText)).toStrictEqual(result);
+      expect(getSortedNumberArray(inputText)).toStrictEqual(result);
     });
 
     it('should return sorted number array - third check', () => {
       expect.assertions(1);
       inputText = '!@#kf2=01d12rev21!@#1577';
       result = ['0', '1', '1', '1', '1', '2', '2', '2', '5', '7', '7'];
-      expect(appService.getSortedNumberArray(inputText)).toStrictEqual(result);
+      expect(getSortedNumberArray(inputText)).toStrictEqual(result);
     });
   });
 
   describe('getBlankRemovedText', () => {
+    const { getBlankRemovedText } = appService;
+
     let inputText;
     const result = '!@#123asdqrwerABCDDAG';
 
-    it('should return blank removed Text - first check', () => {
+    it('should return blank removed text - first check', () => {
       expect.assertions(1);
       inputText = '!@#123  asd  qr wer ABCDDAG';
-      expect(appService.getBlankRemovedText(inputText)).toBe(result);
+      expect(getBlankRemovedText(inputText)).toBe(result);
     });
 
-    it('should return blank removed Text - second check', () => {
+    it('should return blank removed text - second check', () => {
       expect.assertions(1);
       inputText = '!@#123\tasd\nqr wer ABCDDAG';
-      expect(appService.getBlankRemovedText(inputText)).toBe(result);
+      expect(getBlankRemovedText(inputText)).toBe(result);
     });
 
-    it('should return blank removed Text - third check', () => {
+    it('should return blank removed text - third check', () => {
       expect.assertions(1);
       inputText = '!@#  12   3   \t   asd\nqr wer ABCD\rDA\r\r\r\tG';
-      expect(appService.getBlankRemovedText(inputText)).toBe(result);
+      expect(getBlankRemovedText(inputText)).toBe(result);
     });
   });
 
 
   describe('getAllTextOrRemovedHTMLTagText', () => {
+    const { ALL_TEXT_TYPE, REMOVED_HTML_TAG_TYPE, getAllTextOrRemovedHTMLTagText } = appService;
+
     const inputText = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Title</title></head><body><h1>hihi</h1><div><p>hello</p></div></body></html>';
+    let result;
 
     it('should return all text when ALL_TEXT_TYPE', () => {
       expect.assertions(1);
-      expect(appService.getAllTextOrRemovedHTMLTagText(inputText, appService.ALL_TEXT_TYPE)).toBe(inputText);
+      result = inputText;
+      expect(getAllTextOrRemovedHTMLTagText(inputText, ALL_TEXT_TYPE)).toBe(result);
     });
 
     it('should return html tag removed text when REMOVED_HTML_TAG_TYPE', () => {
       expect.assertions(1);
-      expect(appService.getAllTextOrRemovedHTMLTagText(inputText, appService.REMOVED_HTML_TAG_TYPE)).toBe('Titlehihihello');
+      result = 'Titlehihihello';
+      expect(getAllTextOrRemovedHTMLTagText(inputText, REMOVED_HTML_TAG_TYPE)).toBe(result);
     });
 
     it('should not return html tag removed text when ALL_TEXT_TYPE', () => {
       expect.assertions(1);
-      expect(appService.getAllTextOrRemovedHTMLTagText(inputText, appService.ALL_TEXT_TYPE)).not.toBe('Titlehihihello');
+      result = 'Titlehihihello';
+      expect(getAllTextOrRemovedHTMLTagText(inputText, ALL_TEXT_TYPE)).not.toBe(result);
     });
   });
 
   describe('getMixedWithAlphabetAndNumberText', () => {
+    const { getMixedWithAlphabetAndNumberText } = appService;
+
     let alphabeticallySortedArray;
     let numbericallySortedArray;
     let result;
@@ -142,7 +165,7 @@ describe('app.service', () => {
       alphabeticallySortedArray = ['A', 'A', 'a', 'B', 'W', 'w', 'w', 'x'];
       numbericallySortedArray = ['1', '1', '2', '2', '2', '3', '3', '3', '5', '7'];
       result = 'A1A1a2B2W2w3w3x357';
-      expect(appService.getMixedWithAlphabetAndNumberText(alphabeticallySortedArray, numbericallySortedArray)).toBe(result);
+      expect(getMixedWithAlphabetAndNumberText(alphabeticallySortedArray, numbericallySortedArray)).toBe(result);
     });
 
     it('should return text with last some characters when longer alphabet array than number array', () => {
@@ -150,45 +173,48 @@ describe('app.service', () => {
       alphabeticallySortedArray = ['A', 'A', 'a', 'B', 'B', 'b', 'W', 'w', 'w', 'x'];
       numbericallySortedArray = ['1', '1', '2', '5', '3', '7'];
       result = 'A1A1a2B5B3b7Wwwx';
-      expect(appService.getMixedWithAlphabetAndNumberText(alphabeticallySortedArray, numbericallySortedArray)).toBe(result);
+      expect(getMixedWithAlphabetAndNumberText(alphabeticallySortedArray, numbericallySortedArray)).toBe(result);
     });
   });
 
   describe('getQuotient', () => {
+    const { getQuotient } = appService;
+
     const mixedWithAlphabetAndNumberText = 'A1A1a2B5B3b7Wwwx';
     let divider;
     let result;
 
-    it('should be same mixedWithAlphabetAndNumberText with return value when divider 1', () => {
+    it('should be same input text with return text when divider 1', () => {
       expect.assertions(1);
       divider = 1;
       result = mixedWithAlphabetAndNumberText;
-      expect(appService.getQuotient(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+      expect(getQuotient(mixedWithAlphabetAndNumberText, divider)).toBe(result);
     });
 
     it('should return \'A1A1a2B5B3\' when divider 10', () => {
       expect.assertions(1);
       divider = 10;
       result = 'A1A1a2B5B3';
-      expect(appService.getQuotient(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+      expect(getQuotient(mixedWithAlphabetAndNumberText, divider)).toBe(result);
     });
 
     it('should return \'A1A1a2B5B3b7Ww\' when divider 7', () => {
       expect.assertions(1);
       divider = 7;
       result = 'A1A1a2B5B3b7Ww';
-      expect(appService.getQuotient(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+      expect(getQuotient(mixedWithAlphabetAndNumberText, divider)).toBe(result);
     });
 
-    it('should return \'\' when longer divider length than mixedWithAlphabetAndNumberText length', () => {
+    it('should return \'\' when longer divider length than input text length', () => {
       expect.assertions(1);
       divider = mixedWithAlphabetAndNumberText.length + 1;
       result = '';
-      expect(appService.getQuotient(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+      expect(getQuotient(mixedWithAlphabetAndNumberText, divider)).toBe(result);
     });
   });
 
   describe('getRemainder', () => {
+    const { getRemainder } = appService;
     const mixedWithAlphabetAndNumberText = 'A1A1a2B5B3b7Wwwx';
     let divider;
     let result;
@@ -197,35 +223,35 @@ describe('app.service', () => {
       expect.assertions(1);
       divider = mixedWithAlphabetAndNumberText.length + 1;
       result = mixedWithAlphabetAndNumberText;
-      expect(appService.getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+      expect(getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
     });
 
     it('should return \'b7Wwwx\' when divider 10', () => {
       expect.assertions(1);
       divider = 10;
       result = 'b7Wwwx';
-      expect(appService.getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+      expect(getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
     });
 
     it('should return \'wx\' when divider 7', () => {
       expect.assertions(1);
       divider = 7;
       result = 'wx';
-      expect(appService.getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+      expect(getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
     });
 
     it('should return \'\' when divider 1', () => {
       expect.assertions(1);
       divider = 1;
       result = '';
-      expect(appService.getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+      expect(getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
     });
 
     it('should return \'\' when divider 2', () => {
       expect.assertions(1);
       divider = 2;
       result = '';
-      expect(appService.getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+      expect(getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
     });
   });
 });
