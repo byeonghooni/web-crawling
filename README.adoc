@@ -62,6 +62,18 @@ current-directory: $PROJECT_HOME
 $ npm start
 ----
 
+== Test
+
+웹 크롤링 관련 비즈니스 로직을 테스트하실 수 있습니다.
+
+Examples of test are as follows:
+
+[code, subs="attributes"]
+----
+current-directory: $PROJECT_HOME
+
+$ npm test
+----
 
 == Contributors
 
