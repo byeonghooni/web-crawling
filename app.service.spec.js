@@ -1,4 +1,6 @@
-const { isCapitalUniCode, getUniCodeIfSmallThanCapitalElseOrigin, getSortedAlphabetArray, getBlankRemovedText } = require('./app.service');
+const {
+  isCapitalUniCode, getUniCodeIfSmallThanCapitalElseOrigin, getSortedAlphabetArray, getBlankRemovedText, ALL_TEXT_TYPE, REMOVED_HTML_TAG_TYPE, getAllTextOrRemovedHTMLTagText
+} = require('./app.service');
 
 const getUniCode = char => char.charCodeAt(0);
 
@@ -83,6 +85,26 @@ describe('app.service', () => {
       expect.assertions(1);
       inputText = '!@#  12   3   \t   asd\nqr wer ABCD\rDA\r\r\r\tG';
       expect(getBlankRemovedText(inputText)).toBe(result);
+    });
+  });
+
+
+  describe('getAllTextOrRemovedHTMLTagText', () => {
+    const inputText = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Title</title></head><body><h1>hihi</h1><div><p>hello</p></div></body></html>';
+
+    it('should return all text when ALL_TEXT_TYPE', () => {
+      expect.assertions(1);
+      expect(getAllTextOrRemovedHTMLTagText(inputText, ALL_TEXT_TYPE)).toBe(inputText);
+    });
+
+    it('should return html tag removed text when REMOVED_HTML_TAG_TYPE', () => {
+      expect.assertions(1);
+      expect(getAllTextOrRemovedHTMLTagText(inputText, REMOVED_HTML_TAG_TYPE)).toBe('Titlehihihello');
+    });
+
+    it('should not return html tag removed text when ALL_TEXT_TYPE', () => {
+      expect.assertions(1);
+      expect(getAllTextOrRemovedHTMLTagText(inputText, ALL_TEXT_TYPE)).not.toBe('Titlehihihello');
     });
   });
 });

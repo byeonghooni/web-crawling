@@ -1,6 +1,8 @@
 const MIN_CAPITAL_UNI_CODE = 65;
 const MAX_CAPITAL_UNI_CODE = 90;
 const DIFFERENCE_BETWEEN_CAPITAL_UNI_CODE_AND_SMALL_UNI_CODE = 32;
+const ALL_TEXT_TYPE = '1';
+const REMOVED_HTML_TAG_TYPE = '0';
 
 const isCapitalUniCode = (unicode) => {
   return unicode >= MIN_CAPITAL_UNI_CODE && unicode <= MAX_CAPITAL_UNI_CODE;
@@ -43,7 +45,16 @@ const getBlankRemovedText = (text) => {
   return text.replace(/ /gi, '').replace(/\n/g, '').replace(/\r/g, '').replace(/\t/g, '');
 };
 
+const getAllTextOrRemovedHTMLTagText = (text, type) => {
+  return type === ALL_TEXT_TYPE ? text : text.replace(/(<([^>]+)>)/ig, '');
+};
 
 module.exports = {
-  isCapitalUniCode, getUniCodeIfSmallThanCapitalElseOrigin, getSortedAlphabetArray, getBlankRemovedText
+  isCapitalUniCode,
+  getUniCodeIfSmallThanCapitalElseOrigin,
+  getSortedAlphabetArray,
+  getBlankRemovedText,
+  ALL_TEXT_TYPE,
+  REMOVED_HTML_TAG_TYPE,
+  getAllTextOrRemovedHTMLTagText,
 };
