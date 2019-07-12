@@ -1,4 +1,4 @@
-const { isCapitalUniCode, getUniCodeIfSmallThanCapitalElseOrigin } = require('./app.service');
+const { isCapitalUniCode, getUniCodeIfSmallThanCapitalElseOrigin, getSortedAlphabetArray } = require('./app.service');
 
 const getUniCode = char => char.charCodeAt(0);
 
@@ -35,6 +35,28 @@ describe('app.service', () => {
       expect(getUniCodeIfSmallThanCapitalElseOrigin(getUniCode('a'))).not.toBe(getUniCode('a'));
       expect(getUniCodeIfSmallThanCapitalElseOrigin(getUniCode('z'))).not.toBe(getUniCode('z'));
     });
+  });
 
+  describe('getSortedAlphabetArray', () => {
+    it('should return sorted alphabet array - first check', () => {
+      expect.assertions(1);
+      const inputText = 'aegxAdw23!@AfBFwfW';
+      const result = ['A', 'A', 'a', 'B', 'd', 'e', 'F', 'f', 'f', 'g', 'W', 'w', 'w', 'x'];
+      expect(getSortedAlphabetArray(inputText)).toStrictEqual(result);
+    });
+
+    it('should return sorted alphabet array - second check', () => {
+      expect.assertions(1);
+      const inputText = '12!$FEWas3412ERGxf';
+      const result = ['a', 'E', 'E', 'F', 'f', 'G', 'R', 's', 'W', 'x'];
+      expect(getSortedAlphabetArray(inputText)).toStrictEqual(result);
+    });
+
+    it('should return sorted alphabet array - third check', () => {
+      expect.assertions(1);
+      const inputText = '!@#123asdqrwerABCDDAG';
+      const result = ['A', 'A', 'a', 'B', 'C', 'D', 'D', 'd', 'e', 'G', 'q', 'r', 'r', 's', 'w'];
+      expect(getSortedAlphabetArray(inputText)).toStrictEqual(result);
+    });
   });
 });
