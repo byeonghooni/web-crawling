@@ -133,20 +133,99 @@ describe('app.service', () => {
   });
 
   describe('getMixedWithAlphabetAndNumberText', () => {
+    let alphabeticallySortedArray;
+    let numbericallySortedArray;
+    let result;
+
     it('should return text with last some numbers when longer number array than alphabet array', () => {
       expect.assertions(1);
-      const alphabeticallySortedArray = ['A', 'A', 'a', 'B', 'W', 'w', 'w', 'x'];
-      const numbericallySortedArray = ['1', '1', '2', '2', '2', '3', '3', '3', '5', '7'];
-      const result = 'A1A1a2B2W2w3w3x357';
+      alphabeticallySortedArray = ['A', 'A', 'a', 'B', 'W', 'w', 'w', 'x'];
+      numbericallySortedArray = ['1', '1', '2', '2', '2', '3', '3', '3', '5', '7'];
+      result = 'A1A1a2B2W2w3w3x357';
       expect(appService.getMixedWithAlphabetAndNumberText(alphabeticallySortedArray, numbericallySortedArray)).toBe(result);
     });
 
     it('should return text with last some characters when longer alphabet array than number array', () => {
       expect.assertions(1);
-      const alphabeticallySortedArray = ['A', 'A', 'a', 'B', 'B', 'b', 'W', 'w', 'w', 'x'];
-      const numbericallySortedArray = ['1', '1', '2', '5', '3', '7'];
-      const result = 'A1A1a2B5B3b7Wwwx';
+      alphabeticallySortedArray = ['A', 'A', 'a', 'B', 'B', 'b', 'W', 'w', 'w', 'x'];
+      numbericallySortedArray = ['1', '1', '2', '5', '3', '7'];
+      result = 'A1A1a2B5B3b7Wwwx';
       expect(appService.getMixedWithAlphabetAndNumberText(alphabeticallySortedArray, numbericallySortedArray)).toBe(result);
+    });
+  });
+
+  describe('getQuotient', () => {
+    const mixedWithAlphabetAndNumberText = 'A1A1a2B5B3b7Wwwx';
+    let divider;
+    let result;
+
+    it('should be same mixedWithAlphabetAndNumberText with return value when divider 1', () => {
+      expect.assertions(1);
+      divider = 1;
+      result = mixedWithAlphabetAndNumberText;
+      expect(appService.getQuotient(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+    });
+
+    it('should return \'A1A1a2B5B3\' when divider 10', () => {
+      expect.assertions(1);
+      divider = 10;
+      result = 'A1A1a2B5B3';
+      expect(appService.getQuotient(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+    });
+
+    it('should return \'A1A1a2B5B3b7Ww\' when divider 7', () => {
+      expect.assertions(1);
+      divider = 7;
+      result = 'A1A1a2B5B3b7Ww';
+      expect(appService.getQuotient(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+    });
+
+    it('should return \'\' when longer divider length than mixedWithAlphabetAndNumberText length', () => {
+      expect.assertions(1);
+      divider = mixedWithAlphabetAndNumberText.length + 1;
+      result = '';
+      expect(appService.getQuotient(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+    });
+  });
+
+  describe('getRemainder', () => {
+    const mixedWithAlphabetAndNumberText = 'A1A1a2B5B3b7Wwwx';
+    let divider;
+    let result;
+
+    it('should be same when longer divider length than mixedWithAlphabetAndNumberText length', () => {
+      expect.assertions(1);
+      divider = mixedWithAlphabetAndNumberText.length + 1;
+      result = mixedWithAlphabetAndNumberText;
+      expect(appService.getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+    });
+
+    it('should return \'b7Wwwx\' when divider 10', () => {
+      expect.assertions(1);
+      divider = 10;
+      result = 'b7Wwwx';
+      expect(appService.getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+    });
+
+    it('should return \'wx\' when divider 7', () => {
+      expect.assertions(1);
+      divider = 7;
+      result = 'wx';
+      expect(appService.getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+    });
+
+    it('should return \'\' when divider 1', () => {
+      expect.assertions(1);
+      divider = 1;
+      result = '';
+      expect(appService.getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
+    });
+
+    it('should return \'\' when divider 2', () => {
+      expect.assertions(1);
+      divider = 2;
+      result = '';
+      expect(appService.getRemainder(mixedWithAlphabetAndNumberText, divider)).toBe(result);
     });
   });
 });

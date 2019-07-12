@@ -71,6 +71,14 @@ const getMixedWithAlphabetAndNumberText = (alphabeticallySortedArray, numberical
   return result.join('');
 };
 
+const getQuotient = (text, divider) => {
+  return text.substring(0, text.length - (text.length % divider));
+};
+
+const getRemainder = (text, divider) => {
+  return text.substring(text.length - (text.length % divider), text.length);
+};
+
 module.exports = {
   isCapitalUniCode,
   getUniCodeIfSmallThanCapitalElseOrigin,
@@ -81,4 +89,6 @@ module.exports = {
   REMOVED_HTML_TAG_TYPE,
   getAllTextOrRemovedHTMLTagText,
   getMixedWithAlphabetAndNumberText,
+  getQuotient,
+  getRemainder,
 };
