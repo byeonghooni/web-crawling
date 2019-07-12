@@ -41,6 +41,10 @@ const getSortedAlphabetArray = (text) => {
   return text.replace(/[^a-zA-Z]/g, '').split('').sort(ascendAlphabetConsideringCapitalAndSmall);
 };
 
+const getSortedNumberArray = (text) => {
+  return text.replace(/[^0-9]/g, '').split('').sort();
+};
+
 const getBlankRemovedText = (text) => {
   return text.replace(/ /gi, '').replace(/\n/g, '').replace(/\r/g, '').replace(/\t/g, '');
 };
@@ -53,6 +57,7 @@ module.exports = {
   isCapitalUniCode,
   getUniCodeIfSmallThanCapitalElseOrigin,
   getSortedAlphabetArray,
+  getSortedNumberArray,
   getBlankRemovedText,
   ALL_TEXT_TYPE,
   REMOVED_HTML_TAG_TYPE,

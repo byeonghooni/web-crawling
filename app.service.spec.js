@@ -1,5 +1,5 @@
 const {
-  isCapitalUniCode, getUniCodeIfSmallThanCapitalElseOrigin, getSortedAlphabetArray, getBlankRemovedText, ALL_TEXT_TYPE, REMOVED_HTML_TAG_TYPE, getAllTextOrRemovedHTMLTagText
+  isCapitalUniCode, getUniCodeIfSmallThanCapitalElseOrigin, getSortedAlphabetArray, getSortedNumberArray, getBlankRemovedText, ALL_TEXT_TYPE, REMOVED_HTML_TAG_TYPE, getAllTextOrRemovedHTMLTagText
 } = require('./app.service');
 
 const getUniCode = char => char.charCodeAt(0);
@@ -62,6 +62,32 @@ describe('app.service', () => {
       inputText = '!@#123asdqrwerABCDDAG';
       result = ['A', 'A', 'a', 'B', 'C', 'D', 'D', 'd', 'e', 'G', 'q', 'r', 'r', 's', 'w'];
       expect(getSortedAlphabetArray(inputText)).toStrictEqual(result);
+    });
+  });
+
+  describe('getSortedNumberArray', () => {
+    let inputText;
+    let result;
+
+    it('should return sorted number array - first check', () => {
+      expect.assertions(1);
+      inputText = 'aegxAdw23!@AfB1235123FwfW';
+      result = ['1', '1', '2', '2', '2', '3', '3', '3', '5'];
+      expect(getSortedNumberArray(inputText)).toStrictEqual(result);
+    });
+
+    it('should return sorted number array - second check', () => {
+      expect.assertions(1);
+      inputText = '12!$FE098450Was3412E34RGxf';
+      result = ['0', '0', '1', '1', '2', '2', '3', '3', '4', '4', '4', '5', '8', '9'];
+      expect(getSortedNumberArray(inputText)).toStrictEqual(result);
+    });
+
+    it('should return sorted number array - third check', () => {
+      expect.assertions(1);
+      inputText = '!@#kf2=01d12rev21!@#1577';
+      result = ['0', '1', '1', '1', '1', '2', '2', '2', '5', '7', '7'];
+      expect(getSortedNumberArray(inputText)).toStrictEqual(result);
     });
   });
 
