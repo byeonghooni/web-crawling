@@ -22,7 +22,7 @@ const ascendAlphabetConsideringCapitalAndSmall = (a, b) => {
   const changedToCapitalWithNextUniCode = getUniCodeIfSmallThanCapitalElseOrigin(nextUniCode);
 
   let result;
-  if (changedToCapitalWithNextUniCode < changedToCapitalWithBeforeUniCode) { // 이전값이 작으면 -1
+  if (changedToCapitalWithNextUniCode < changedToCapitalWithBeforeUniCode) {
     result = -1;
   } else if (changedToCapitalWithNextUniCode === changedToCapitalWithBeforeUniCode) {
     if (isCapitalUniCode(nextUniCode) && !isCapitalUniCode(beforeUniCode)) {
@@ -56,11 +56,11 @@ const getAllTextOrRemovedHTMLTagText = (text, type) => {
 };
 
 const getMixedWithAlphabetAndNumberText = (alphabeticallySortedArray, numbericallySortedArray) => {
-  const result = [];
   const alphabetArrayLength = alphabeticallySortedArray.length;
   const numberArrayLength = numbericallySortedArray.length;
-
   const moreManyItemArray = (alphabetArrayLength >= numberArrayLength) ? alphabeticallySortedArray : numbericallySortedArray;
+
+  const result = [];
 
   for (let i = 0; i < moreManyItemArray.length; i++) {
     if (alphabeticallySortedArray[i]) {
@@ -70,6 +70,7 @@ const getMixedWithAlphabetAndNumberText = (alphabeticallySortedArray, numberical
       result.push(numbericallySortedArray[i]);
     }
   }
+
   return result.join('');
 };
 
@@ -110,5 +111,5 @@ module.exports = {
   getMixedWithAlphabetAndNumberText,
   getQuotient,
   getRemainder,
-  getQuotientAndRemainder,
+  getQuotientAndRemainder
 };
