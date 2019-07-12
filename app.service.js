@@ -17,11 +17,11 @@ const getUniCodeIfSmallThanCapitalElseOrigin = (uniCode) => {
 const ascendAlphabetConsideringCapitalAndSmall = (a, b) => {
   const beforeUniCode = b.charCodeAt(0);
   const nextUniCode = a.charCodeAt(0);
-
   const changedToCapitalWithBeforeUniCode = getUniCodeIfSmallThanCapitalElseOrigin(beforeUniCode);
   const changedToCapitalWithNextUniCode = getUniCodeIfSmallThanCapitalElseOrigin(nextUniCode);
 
   let result;
+
   if (changedToCapitalWithNextUniCode < changedToCapitalWithBeforeUniCode) {
     result = -1;
   } else if (changedToCapitalWithNextUniCode === changedToCapitalWithBeforeUniCode) {
