@@ -62,6 +62,10 @@ current-directory: $PROJECT_HOME
 $ npm start
 ----
 
+서버가 실행되면 아래 주소에 접속하셔서 확인하실 수 있습니다.
+
+`http://localhost:3000`
+
 == Test
 
 웹 크롤링 관련 비즈니스 로직을 테스트하실 수 있습니다.
