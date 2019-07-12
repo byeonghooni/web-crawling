@@ -1,4 +1,4 @@
-const { isCapitalUniCode, getUniCodeIfSmallThanCapitalElseOrigin, getSortedAlphabetArray } = require('./app.service');
+const { isCapitalUniCode, getUniCodeIfSmallThanCapitalElseOrigin, getSortedAlphabetArray, getBlankRemovedText } = require('./app.service');
 
 const getUniCode = char => char.charCodeAt(0);
 
@@ -38,25 +38,51 @@ describe('app.service', () => {
   });
 
   describe('getSortedAlphabetArray', () => {
+    let inputText;
+    let result;
+
     it('should return sorted alphabet array - first check', () => {
       expect.assertions(1);
-      const inputText = 'aegxAdw23!@AfBFwfW';
-      const result = ['A', 'A', 'a', 'B', 'd', 'e', 'F', 'f', 'f', 'g', 'W', 'w', 'w', 'x'];
+      inputText = 'aegxAdw23!@AfBFwfW';
+      result = ['A', 'A', 'a', 'B', 'd', 'e', 'F', 'f', 'f', 'g', 'W', 'w', 'w', 'x'];
       expect(getSortedAlphabetArray(inputText)).toStrictEqual(result);
     });
 
     it('should return sorted alphabet array - second check', () => {
       expect.assertions(1);
-      const inputText = '12!$FEWas3412ERGxf';
-      const result = ['a', 'E', 'E', 'F', 'f', 'G', 'R', 's', 'W', 'x'];
+      inputText = '12!$FEWas3412ERGxf';
+      result = ['a', 'E', 'E', 'F', 'f', 'G', 'R', 's', 'W', 'x'];
       expect(getSortedAlphabetArray(inputText)).toStrictEqual(result);
     });
 
     it('should return sorted alphabet array - third check', () => {
       expect.assertions(1);
-      const inputText = '!@#123asdqrwerABCDDAG';
-      const result = ['A', 'A', 'a', 'B', 'C', 'D', 'D', 'd', 'e', 'G', 'q', 'r', 'r', 's', 'w'];
+      inputText = '!@#123asdqrwerABCDDAG';
+      result = ['A', 'A', 'a', 'B', 'C', 'D', 'D', 'd', 'e', 'G', 'q', 'r', 'r', 's', 'w'];
       expect(getSortedAlphabetArray(inputText)).toStrictEqual(result);
+    });
+  });
+
+  describe('getBlankRemovedText', () => {
+    let inputText;
+    const result = '!@#123asdqrwerABCDDAG';
+
+    it('should return blank removed Text - first check', () => {
+      expect.assertions(1);
+      inputText = '!@#123  asd  qr wer ABCDDAG';
+      expect(getBlankRemovedText(inputText)).toBe(result);
+    });
+
+    it('should return blank removed Text - second check', () => {
+      expect.assertions(1);
+      inputText = '!@#123\tasd\nqr wer ABCDDAG';
+      expect(getBlankRemovedText(inputText)).toBe(result);
+    });
+
+    it('should return blank removed Text - third check', () => {
+      expect.assertions(1);
+      inputText = '!@#  12   3   \t   asd\nqr wer ABCD\rDA\r\r\r\tG';
+      expect(getBlankRemovedText(inputText)).toBe(result);
     });
   });
 });

@@ -2,8 +2,6 @@ const MIN_CAPITAL_UNI_CODE = 65;
 const MAX_CAPITAL_UNI_CODE = 90;
 const DIFFERENCE_BETWEEN_CAPITAL_UNI_CODE_AND_SMALL_UNI_CODE = 32;
 
-
-
 const isCapitalUniCode = (unicode) => {
   return unicode >= MIN_CAPITAL_UNI_CODE && unicode <= MAX_CAPITAL_UNI_CODE;
 };
@@ -41,4 +39,11 @@ const getSortedAlphabetArray = (text) => {
   return text.replace(/[^a-zA-Z]/g, '').split('').sort(ascendAlphabetConsideringCapitalAndSmall);
 };
 
-module.exports = { isCapitalUniCode, getUniCodeIfSmallThanCapitalElseOrigin, getSortedAlphabetArray };
+const getBlankRemovedText = (text) => {
+  return text.replace(/ /gi, '').replace(/\n/g, '').replace(/\r/g, '').replace(/\t/g, '');
+};
+
+
+module.exports = {
+  isCapitalUniCode, getUniCodeIfSmallThanCapitalElseOrigin, getSortedAlphabetArray, getBlankRemovedText
+};
