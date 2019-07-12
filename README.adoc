@@ -1,0 +1,68 @@
+:project_name: Web Crawling
+:project_license: Private
+:author: ByeongHoon Lee
+:email: <byeonghooni@icloud.com>
+:icons: font
+:git_service: https://github.com/byeonghooni/
+:git_repo: web-crawling
+:project_version: 2019.28.0
+
+= {project_name}
+
+image:https://img.shields.io/badge/version-{project_version}-blue.svg[link="./CHANGELOG",title="version"] image:https://img.shields.io/badge/license-{project_license}-lightgrey.svg[link="./LICENSE",title="license"]
+
+
+== What is the Project
+
+이 프로젝트는 {project_name} 저장소입니다.
+
+
+== Status
+
+Version {project_version}
+
+이 프로젝트의 버전 이력은 link:./CHANGELOG[CHANGELOG]에서 확인하실 수 있습니다.
+
+
+== Building
+
+Clone a copy of the project repository:
+
+[code, subs="attributes"]
+----
+
+$ git clone {git_service}{git_repo}.git
+----
+
+Change to the project directory:
+
+[code, subs="attributes"]
+----
+
+$ cd {git_repo}
+----
+
+Building a project:
+
+[code, subs="attributes"]
+----
+current-directory: $PROJECT_HOME
+
+$ npm install
+----
+
+== Usage
+
+Examples of usage are as follows:
+
+[code, subs="attributes"]
+----
+current-directory: $PROJECT_HOME
+
+$ npm start
+----
+
+
+== Contributors
+
+- {author} {email}

@@ -1,0 +1,29 @@
+{
+  "name": "web-crawling",
+  "version": "1.0.0",
+  "description": "Web Crawling Project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byeonghooni/web-crawling.git"
+  },
+  "keywords": [
+    "web crawling",
+    "express",
+    "express-handlebars"
+  ],
+  "author": "ByeongHoon Lee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/byeonghooni/web-crawling/issues"
+  },
+  "homepage": "https://github.com/byeonghooni/web-crawling#readme",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0"
+  }
+}
