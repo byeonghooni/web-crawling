@@ -1,3 +1,5 @@
+const Axios = require('axios');
+
 const MIN_CAPITAL_UNI_CODE = 65;
 const MAX_CAPITAL_UNI_CODE = 90;
 const DIFFERENCE_BETWEEN_CAPITAL_UNI_CODE_AND_SMALL_UNI_CODE = 32;
@@ -79,6 +81,23 @@ const getRemainder = (text, divider) => {
   return text.substring(text.length - (text.length % divider), text.length);
 };
 
+const getQuotientAndRemainder = async (url, type, divider) => {
+  const response = await Axios.get(url);
+
+  const blankRemovedText = getBlankRemovedText(response.data);
+  const allOrRemovedHTMLTagText = getAllTextOrRemovedHTMLTagText(blankRemovedText, type);
+
+  const alphabeticallySortedArray = getSortedAlphabetArray(allOrRemovedHTMLTagText);
+  const numbericallySortedArray = getSortedNumberArray(allOrRemovedHTMLTagText);
+
+  const mixedWithAlphabetAndNumberText = getMixedWithAlphabetAndNumberText(alphabeticallySortedArray, numbericallySortedArray);
+
+  const quotient = getQuotient(mixedWithAlphabetAndNumberText, divider);
+  const remainder = getRemainder(mixedWithAlphabetAndNumberText, divider);
+
+  return { quotient, remainder };
+};
+
 module.exports = {
   isCapitalUniCode,
   getUniCodeIfSmallThanCapitalElseOrigin,
@@ -91,4 +110,5 @@ module.exports = {
   getMixedWithAlphabetAndNumberText,
   getQuotient,
   getRemainder,
+  getQuotientAndRemainder,
 };
