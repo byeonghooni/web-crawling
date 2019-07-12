@@ -1,6 +1,6 @@
 {
   "name": "web-crawling",
-  "version": "1.0.0",
+  "version": "2019.28.0",
   "description": "Web Crawling Project",
   "main": "app.js",
   "scripts": {
