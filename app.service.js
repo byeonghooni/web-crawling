@@ -53,6 +53,24 @@ const getAllTextOrRemovedHTMLTagText = (text, type) => {
   return type === ALL_TEXT_TYPE ? text : text.replace(/(<([^>]+)>)/ig, '');
 };
 
+const getMixedWithAlphabetAndNumberText = (alphabeticallySortedArray, numbericallySortedArray) => {
+  const result = [];
+  const alphabetArrayLength = alphabeticallySortedArray.length;
+  const numberArrayLength = numbericallySortedArray.length;
+
+  const moreManyItemArray = (alphabetArrayLength >= numberArrayLength) ? alphabeticallySortedArray : numbericallySortedArray;
+
+  for (let i = 0; i < moreManyItemArray.length; i++) {
+    if (alphabeticallySortedArray[i]) {
+      result.push(alphabeticallySortedArray[i]);
+    }
+    if (numbericallySortedArray[i]) {
+      result.push(numbericallySortedArray[i]);
+    }
+  }
+  return result.join('');
+};
+
 module.exports = {
   isCapitalUniCode,
   getUniCodeIfSmallThanCapitalElseOrigin,
@@ -62,4 +80,5 @@ module.exports = {
   ALL_TEXT_TYPE,
   REMOVED_HTML_TAG_TYPE,
   getAllTextOrRemovedHTMLTagText,
+  getMixedWithAlphabetAndNumberText,
 };
