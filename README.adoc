@@ -1,5 +1,5 @@
 :project_name: Web Crawling
-:project_license: Private
+:project_license: MIT
 :author: ByeongHoon Lee
 :email: <byeonghooni@icloud.com>
 :icons: font
