@@ -1,4 +1,4 @@
-const appService = require('./app.service');
+const appService = require('../main/app.service');
 
 const getUniCode = char => char.charCodeAt(0);
 

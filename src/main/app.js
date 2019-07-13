@@ -1,3 +1,4 @@
+const Path = require('path');
 const Express = require('express');
 const Hbs = require('express-handlebars');
 
@@ -5,6 +6,7 @@ const { getQuotientAndRemainder } = require('./app.service');
 
 const app = Express();
 
+app.set('views', Path.join(__dirname, '/views'));
 app.engine('handlebars', Hbs());
 app.set('view engine', 'handlebars');
 

@@ -2,9 +2,9 @@
   "name": "web-crawling",
   "version": "2019.28.0",
   "description": "Web Crawling Project",
-  "main": "app.js",
+  "main": "src/main/app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node src/main/app.js",
     "test": "jest"
   },
   "repository": {
